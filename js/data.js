@@ -4,7 +4,7 @@ const defaultCategories = {
   level2: "Mức độ 2",
   level3: "Mức độ 3",
   level4: "Mức độ 4", 
-  // level5: "Mức độ 5",
+  level5: "Vi phạm luật người tiêu dùng",
   // level6: "Mức độ 6",
   riot: "Bạo loạn thành phố",
   hqAttack: "Tấn công trụ sở",
@@ -48,11 +48,9 @@ const defaultOffenses = {
     { id: "l4_2", name: "Tấn công nhân viên Y Tế", time: 120 },
     { id: "l4_3", name: "Đe dọa, xúc phạm nhân viên Chính Phủ", time: 120 },
   ],
-  // level5: [
-  //   { id: "l5_1", name: "Giết người", time: 60 },
-  //   { id: "l5_2", name: "Khủng bố", time: 70 },
-  //   { id: "l5_3", name: "Bắt cóc tống tiền", time: 65 },
-  // ],
+  level5: [
+    { id: "l5_1", name: "Nợ hóa đơn", time: 5 },
+  ],
   // level6: [
   //   { id: "l6_1", name: "Giết cảnh sát", time: 80 },
   //   { id: "l6_2", name: "Khủng bố quy mô lớn", time: 90 },

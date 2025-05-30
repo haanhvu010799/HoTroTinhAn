@@ -14,14 +14,28 @@ const defaultCategories = {
 // Sample offenses data
 const defaultOffenses = {
   level1: [
-    { id: "l1_1", name: "Vượt đèn đỏ", time: 5 },
-    { id: "l1_2", name: "Đậu xe sai quy định", time: 5 },
-    { id: "l1_3", name: "Lái xe nguy hiểm", time: 10 },
+    { id: "l1_1", name: "Cản trở người thi hành công vụ ", time: 20 },
+    { id: "l1_2", name: "Hỗ trợ đồng bọn, trợ giúp tội phạm ", time: 20 },
+    { id: "l1_3", name: "Không giao nộp hung khí gây án ", time: 20 },
+    { id: "l1_4", name: "Tàng trữ/sử dụng giáp ", time: 20 },
+    { id: "l1_5", name: "Giả danh người Nhà Nước ", time: 20 },
+    { id: "l1_6", name: "Gây rối trật tự nơi công cộng ", time: 20 },
+    { id: "l1_7", name: "Trộm cắp tài sản công dân ", time: 20 },
+    { id: "l1_8", name: "Phá hoại tài sản Nhà Nước ", time: 20 },
   ],
   level2: [
-    { id: "l2_1", name: "Trộm cắp vặt", time: 15 },
-    { id: "l2_2", name: "Phá hoại tài sản công", time: 20 },
-    { id: "l2_3", name: "Gây rối trật tự", time: 25 },
+    { id: "l2_1", name: "Nhập cư trái phép", time: 30 },
+    { id: "l2_2", name: "Tàng trữ chất cấm trái phép", time: 30 },
+    { id: "l2_3", name: "Vu khống người khác", time: 30 },
+    { id: "l2_4", name: "Có hành động, lời lẽ xúc phạm đến người khác ", time: 30 },
+    { id: "l2_5", name: "Tàng trữ vũ khí trái phép ", time: 30 },
+    { id: "l2_6", name: "Sử dụng vũ khí trái phép ", time: 30 },
+    { id: "l2_7", name: "Sử dụng vũ khí nơi công cộng ", time: 30 },
+    { id: "l2_8", name: "Gây rối trước khu vực trụ sở cơ quan Nhà Nước ", time: 30 },
+    { id: "l2_9", name: "Sử dụng nắm đấm gây thương tích chưa nghiêm trọng ", time: 30 },
+    { id: "l2_10", name: "Tấn công gây thương tích chưa nghiêm trọng ", time: 30 },
+    { id: "l2_11", name: "Xâm nhập trụ sở, nơi làm việc của Ban ngành Nhà Nước ", time: 30 },
+
   ],
   level3: [
     { id: "l3_1", name: "Tàng trữ vũ khí trái phép", time: 30 },
@@ -177,7 +191,10 @@ class DataManager {
     });
     
     const totalTime = this.calculateTotalTime();
-    return offenseTexts.join(' + ') + (offenseTexts.length > 0 ? ` = ${totalTime} phút` : '');
+    return offenseTexts.join(' + ') + (offenseTexts.length > 0 ? ` ` : '');
+
+
+    // return offenseTexts.join(' + ') + (offenseTexts.length > 0 ? ` = ${totalTime} phút` : '');
   }
 
   resetSelectedOffenses() {

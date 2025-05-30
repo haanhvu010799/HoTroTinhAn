@@ -29,7 +29,11 @@ class UI {
     this.copyBtn.addEventListener('click', () => {
       this.copyText();
     });
-    
+    // Reset button
+    const resetBtn = document.getElementById('resetBtn');
+    resetBtn.addEventListener('click', () => {
+      location.reload(); // hành vi giống F5
+    });
     // Category tabs clicks
     this.categoriesTabs.addEventListener('click', (e) => {
       if (e.target.classList.contains('category-tab')) {

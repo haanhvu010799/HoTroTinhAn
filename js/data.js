@@ -4,8 +4,8 @@ const defaultCategories = {
   level2: "Mức độ 2",
   level3: "Mức độ 3",
   level4: "Mức độ 4", 
-  level5: "Mức độ 5",
-  level6: "Mức độ 6",
+  // level5: "Mức độ 5",
+  // level6: "Mức độ 6",
   riot: "Bạo loạn thành phố",
   hqAttack: "Tấn công trụ sở",
   intrusion: "Xâm nhập"
@@ -38,39 +38,40 @@ const defaultOffenses = {
 
   ],
   level3: [
-    { id: "l3_1", name: "Tàng trữ vũ khí trái phép", time: 30 },
-    { id: "l3_2", name: "Buôn bán hàng cấm", time: 35 },
-    { id: "l3_3", name: "Cướp giật tài sản", time: 40 },
+    { id: "l3_1", name: "Tấn công gây thương tích nghiêm trọng cho người khác", time: 60 },
+    { id: "l3_2", name: "Tấn công sĩ quan cảnh sát gây thương tích nghiêm trọng", time: 60 },
+    { id: "l3_3", name: "Tấn công sĩ quan cảnh sát gây thương tích chưa nghiêm trọng", time: 60 },
+    { id: "l3_4", name: "Rao bán/ Hỏi mua, giao dịch vũ khí, vật phẩm cấm", time: 60 },
   ],
   level4: [
-    { id: "l4_1", name: "Tấn công người dân", time: 45 },
-    { id: "l4_2", name: "Buôn bán ma túy", time: 50 },
-    { id: "l4_3", name: "Cướp có vũ khí", time: 55 },
+    { id: "l4_1", name: "Tấn công Cán bộ Cao cấp", time: 120 },
+    { id: "l4_2", name: "Tấn công nhân viên Y Tế", time: 120 },
+    { id: "l4_3", name: "Đe dọa, xúc phạm nhân viên Chính Phủ", time: 120 },
   ],
-  level5: [
-    { id: "l5_1", name: "Giết người", time: 60 },
-    { id: "l5_2", name: "Khủng bố", time: 70 },
-    { id: "l5_3", name: "Bắt cóc tống tiền", time: 65 },
-  ],
-  level6: [
-    { id: "l6_1", name: "Giết cảnh sát", time: 80 },
-    { id: "l6_2", name: "Khủng bố quy mô lớn", time: 90 },
-    { id: "l6_3", name: "Tội phạm có tổ chức", time: 85 },
-  ],
+  // level5: [
+  //   { id: "l5_1", name: "Giết người", time: 60 },
+  //   { id: "l5_2", name: "Khủng bố", time: 70 },
+  //   { id: "l5_3", name: "Bắt cóc tống tiền", time: 65 },
+  // ],
+  // level6: [
+  //   { id: "l6_1", name: "Giết cảnh sát", time: 80 },
+  //   { id: "l6_2", name: "Khủng bố quy mô lớn", time: 90 },
+  //   { id: "l6_3", name: "Tội phạm có tổ chức", time: 85 },
+  // ],
   riot: [
-    { id: "r_1", name: "Kích động bạo loạn", time: 50 },
-    { id: "r_2", name: "Tham gia bạo loạn", time: 60 },
-    { id: "r_3", name: "Cầm đầu bạo loạn", time: 90 },
+    { id: "r_1", name: "Bạo loạn Thành Phố", time: 200 },
+    // { id: "r_2", name: "Tham gia bạo loạn", time: 60 },
+    // { id: "r_3", name: "Cầm đầu bạo loạn", time: 90 },
   ],
   hqAttack: [
-    { id: "hq_1", name: "Tấn công đồn cảnh sát", time: 80 },
-    { id: "hq_2", name: "Tấn công nhà tù", time: 85 },
-    { id: "hq_3", name: "Tấn công cơ quan chính phủ", time: 90 },
+    { id: "hq_1", name: "Tấn công trụ sở Ban Ngành", time: 200 },
+    // { id: "hq_2", name: "Tấn công nhà tù", time: 85 },
+    // { id: "hq_3", name: "Tấn công cơ quan chính phủ", time: 90 },
   ],
   intrusion: [
-    { id: "in_1", name: "Đột nhập khu vực cấm", time: 40 },
-    { id: "in_2", name: "Xâm nhập cơ sở quân sự", time: 60 },
-    { id: "in_3", name: "Xâm nhập trụ sở cảnh sát", time: 50 },
+    { id: "in_1", name: "Xâm nhập Nhà Tù trái phép", time: 180 },
+    { id: "in_2", name: "Xâm nhập Quân Khu trái phép", time: 180 },
+    { id: "in_3", name: "Xâm nhập Học Viện trái phép", time: 180 },
   ]
 };
 

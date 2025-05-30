@@ -35,6 +35,7 @@ const defaultOffenses = {
     { id: "l2_9", name: "Sử dụng nắm đấm gây thương tích chưa nghiêm trọng ", time: 30 },
     { id: "l2_10", name: "Tấn công gây thương tích chưa nghiêm trọng ", time: 30 },
     { id: "l2_11", name: "Xâm nhập trụ sở, nơi làm việc của Ban ngành Nhà Nước ", time: 30 },
+    { id: "l2_12", name: "Chống đối người thi hành công vụ ", time: 30 },
 
   ],
   level3: [

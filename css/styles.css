@@ -584,3 +584,15 @@ button {
   gap: var(--space-md);
   margin-top: var(--space-lg);
 }
+.search-container {
+  margin: 10px 0;
+  text-align: center;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

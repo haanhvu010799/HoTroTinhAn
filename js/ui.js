@@ -34,6 +34,12 @@ class UI {
     resetBtn.addEventListener('click', () => {
       location.reload(); // hành vi giống F5
     });
+      // Search input
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', (e) => {
+      const keyword = e.target.value.toLowerCase();
+      this.searchOffenses(keyword);
+    });
     // Category tabs clicks
     this.categoriesTabs.addEventListener('click', (e) => {
       if (e.target.classList.contains('category-tab')) {
@@ -235,7 +241,26 @@ class UI {
       this.copyBtn.classList.remove('copied');
     }, 2000);
   }
-  
+// Tìm kiếm tội danh trong tất cả các categories
+  searchOffenses(keyword) {
+    document.querySelectorAll('.offenses-list').forEach(list => {
+      let hasMatch = false;
+      
+      list.querySelectorAll('.offense-card').forEach(card => {
+        const name = card.querySelector('.offense-name').textContent.toLowerCase();
+        if (name.includes(keyword)) {
+          card.style.display = '';
+          hasMatch = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Ẩn danh mục nếu không có offense nào phù hợp
+      list.style.display = hasMatch ? '' : 'none';
+    });
+  }
+
   // Refresh the UI (call after data changes)
   refreshUI() {
     this.renderCategories();
@@ -243,5 +268,7 @@ class UI {
     this.updateResults();
   }
 }
+
+
 
 // UI will be initialized in app.js

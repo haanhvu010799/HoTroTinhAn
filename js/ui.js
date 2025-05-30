@@ -187,6 +187,11 @@ class UI {
     const totalTime = this.dataManager.calculateTotalTime();
     this.totalTimeElement.textContent = `${totalTime} phút`;
     
+    // Tính tiền bảo lãnh
+    const bailAmount = this.dataManager.calculateBailAmount();
+    const bailAmountElement = document.getElementById('bailAmount');
+    bailAmountElement.textContent = bailAmount > 0 ? `${bailAmount.toLocaleString()}$` : 'Không được bảo lãnh';
+
     // Update selected offenses list
     this.renderSelectedOffenses();
     

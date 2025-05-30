@@ -214,6 +214,25 @@ class DataManager {
   return normalTime + riotTime + hqAttackTime;
 }
 
+  calculateBailAmount() {
+  const selectedDetails = this.getSelectedOffensesDetails();
+
+  let isBailable = true;
+  let totalTime = 0;
+
+  for (const detail of selectedDetails) {
+    const categoryId = this.findOffenseById(detail.id).categoryId;
+    if (categoryId !== 'level1' && categoryId !== 'level2') {
+      isBailable = false;
+      break;
+    }
+    totalTime += detail.totalTime;
+  }
+
+  return isBailable ? totalTime * 2000 : 0;
+}
+
+
   generateCopyText() {
     const selectedDetails = this.getSelectedOffensesDetails();
     const offenseTexts = selectedDetails.map(offense => {

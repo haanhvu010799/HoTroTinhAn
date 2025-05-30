@@ -180,10 +180,39 @@ class DataManager {
     return selectedDetails;
   }
 
+  // calculateTotalTime() {
+  //   const selectedDetails = this.getSelectedOffensesDetails();
+  //   return selectedDetails.reduce((total, offense) => total + offense.totalTime, 0);
+  // }
   calculateTotalTime() {
-    const selectedDetails = this.getSelectedOffensesDetails();
-    return selectedDetails.reduce((total, offense) => total + offense.totalTime, 0);
+  let normalTime = 0;
+  let riotTime = 0;
+  let hqAttackTime = 0;
+
+  for (const offenseId in this.selectedOffenses) {
+    const count = this.selectedOffenses[offenseId];
+    const result = this.findOffenseById(offenseId);
+    if (result) {
+      const offenseTime = result.offense.time * count;
+      const categoryId = result.categoryId;
+
+      if (categoryId === 'riot') {
+        riotTime += offenseTime;
+      } else if (categoryId === 'hqAttack') {
+        hqAttackTime += offenseTime;
+      } else {
+        normalTime += offenseTime;
+      }
+    }
   }
+
+  // Áp dụng giới hạn
+  if (normalTime > 500) normalTime = 500;
+  if (riotTime > 1000) riotTime = 1000;
+  if (hqAttackTime > 1000) hqAttackTime = 1000;
+
+  return normalTime + riotTime + hqAttackTime;
+}
 
   generateCopyText() {
     const selectedDetails = this.getSelectedOffensesDetails();

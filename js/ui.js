@@ -241,25 +241,75 @@ class UI {
       this.copyBtn.classList.remove('copied');
     }, 2000);
   }
-// Tìm kiếm tội danh trong tất cả các categories
-  searchOffenses(keyword) {
-    document.querySelectorAll('.offenses-list').forEach(list => {
-      let hasMatch = false;
+// // Tìm kiếm tội danh trong tất cả các categories
+//   searchOffenses(keyword) {
+//     document.querySelectorAll('.offenses-list').forEach(list => {
+//       let hasMatch = false;
       
-      list.querySelectorAll('.offense-card').forEach(card => {
-        const name = card.querySelector('.offense-name').textContent.toLowerCase();
-        if (name.includes(keyword)) {
-          card.style.display = '';
-          hasMatch = true;
-        } else {
-          card.style.display = 'none';
-        }
-      });
+//       list.querySelectorAll('.offense-card').forEach(card => {
+//         const name = card.querySelector('.offense-name').textContent.toLowerCase();
+//         if (name.includes(keyword)) {
+//           card.style.display = '';
+//           hasMatch = true;
+//         } else {
+//           card.style.display = 'none';
+//         }
+//       });
 
-      // Ẩn danh mục nếu không có offense nào phù hợp
-      list.style.display = hasMatch ? '' : 'none';
+//       // Ẩn danh mục nếu không có offense nào phù hợp
+//       list.style.display = hasMatch ? '' : 'none';
+//     });
+//   }
+removeVietnameseTones(str) {
+  return str
+    .normalize('NFD')                      // Chuyển về dạng ký tự chuẩn
+    .replace(/[\u0300-\u036f]/g, '')      // Xóa dấu
+    .replace(/đ/g, 'd')                   // Chuyển đ → d
+    .replace(/Đ/g, 'D')                   // Chuyển Đ → D
+    .toLowerCase();
+}
+searchOffenses(keyword) {
+  const keywordNormalized = this.removeVietnameseTones(keyword.toLowerCase());
+  const offensesListsContainer = document.getElementById('offensesLists');
+  
+  // Nếu ô tìm kiếm rỗng, render lại giao diện gốc
+  if (!keyword.trim()) {
+    this.renderOffenses();
+    return;
+  }
+  
+  const matchingOffenses = [];
+  for (const categoryId in this.dataManager.offenses) {
+    this.dataManager.offenses[categoryId].forEach(offense => {
+      const offenseNameNormalized = this.removeVietnameseTones(offense.name.toLowerCase());
+      if (offenseNameNormalized.includes(keywordNormalized)) {
+        matchingOffenses.push(offense);
+      }
     });
   }
+  
+  // Hiển thị kết quả tìm kiếm (như trước đó)
+  offensesListsContainer.innerHTML = '';
+  const searchList = document.createElement('div');
+  searchList.className = 'offenses-list active';
+  
+  if (matchingOffenses.length === 0) {
+    const emptyMessage = document.createElement('p');
+    emptyMessage.className = 'empty-message';
+    emptyMessage.textContent = 'Không tìm thấy tội danh phù hợp';
+    searchList.appendChild(emptyMessage);
+  } else {
+    matchingOffenses.forEach(offense => {
+      const isSelected = this.dataManager.selectedOffenses[offense.id] !== undefined;
+      const count = isSelected ? this.dataManager.selectedOffenses[offense.id] : 1;
+      const card = this.createOffenseCard(offense, isSelected, count);
+      searchList.appendChild(card);
+    });
+  }
+  
+  offensesListsContainer.appendChild(searchList);
+}
+
 
   // Refresh the UI (call after data changes)
   refreshUI() {

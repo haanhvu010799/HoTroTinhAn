@@ -65,6 +65,7 @@ button {
   box-shadow: var(--shadow-md);
   padding: var(--space-md);
   position: sticky;
+  align-items: center;
   top: 0;
   z-index: 10;
 }
@@ -81,9 +82,9 @@ button {
 .header-brand {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  justify-content: center;
+  gap: 10px; /* khoảng cách giữa logo và tiêu đề */
 }
-
 .header-logo {
   display: flex;
   align-items: center;
@@ -608,4 +609,12 @@ button {
 #searchInput:focus {
   border-color: var(--primary-color);
   outline: none;
+}
+.footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
 }

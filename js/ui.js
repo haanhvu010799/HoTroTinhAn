@@ -136,50 +136,64 @@ class UI {
     });
   }
 
-  createOffenseCard(offense, isSelected, count) {
-    const card = document.createElement('div');
-    card.className = 'offense-card';
+ createOffenseCard(offense, isSelected, count) {
+  const card = document.createElement('div');
+  card.className = 'offense-card';
 
-    const header = document.createElement('div');
-    header.className = 'offense-header';
+  const header = document.createElement('div');
+  header.className = 'offense-header';
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.className = 'offense-checkbox';
-    checkbox.dataset.id = offense.id;
-    checkbox.checked = isSelected;
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.className = 'offense-checkbox';
+  checkbox.dataset.id = offense.id;
+  checkbox.checked = isSelected;
 
-    const name = document.createElement('div');
-    name.className = 'offense-name';
-    name.textContent = offense.name;
+  const nameElement = document.createElement('div');
+  nameElement.className = 'offense-name';
 
-    const time = document.createElement('div');
-    time.className = 'offense-time';
-    time.textContent = `${offense.time} phút`;
+  const keywords = ['vũ khí', 'phương tiện', 'giáp', 'hung khí', 'nắm đấm','chưa nghiêm trọng' ,'nghiêm trọng', 'cảnh sát'];
+let highlightedName = offense.name;
 
-    header.appendChild(checkbox);
-    header.appendChild(name);
-    header.appendChild(time);
+keywords.forEach(keyword => {
+  const regex = new RegExp(`(${keyword})`, 'ig');
+  highlightedName = highlightedName.replace(
+    regex, 
+    '<span style="font-weight: bold; color: red;">$1</span>'
+  );
+});
 
-    const countContainer = document.createElement('div');
-    countContainer.className = 'offense-count';
-    const countLabel = document.createElement('label');
-    countLabel.textContent = 'Số lần:';
-    const countInput = document.createElement('input');
-    countInput.type = 'number';
-    countInput.min = '1';
-    countInput.value = count;
-    countInput.dataset.countId = offense.id;
-    countInput.disabled = !isSelected;
+nameElement.innerHTML = highlightedName;
+  const timeElement = document.createElement('div');
+  timeElement.className = 'offense-time';
+  timeElement.textContent = `${offense.time} phút`;
 
-    countContainer.appendChild(countLabel);
-    countContainer.appendChild(countInput);
+  header.appendChild(checkbox);
+  header.appendChild(nameElement);
+  header.appendChild(timeElement);
 
-    card.appendChild(header);
-    card.appendChild(countContainer);
+  const countContainer = document.createElement('div');
+  countContainer.className = 'offense-count';
 
-    return card;
-  }
+  const countLabel = document.createElement('label');
+  countLabel.textContent = 'Số lần:';
+
+  const countInput = document.createElement('input');
+  countInput.type = 'number';
+  countInput.min = '1';
+  countInput.value = count;
+  countInput.dataset.countId = offense.id;
+  countInput.disabled = !isSelected;
+
+  countContainer.appendChild(countLabel);
+  countContainer.appendChild(countInput);
+
+  card.appendChild(header);
+  card.appendChild(countContainer);
+
+  return card;
+}
+
 
   changeCategory(categoryId) {
     document.querySelectorAll('.category-tab').forEach(tab => {

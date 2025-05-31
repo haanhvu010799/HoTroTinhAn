@@ -40,6 +40,29 @@ class UI {
       const keyword = e.target.value.toLowerCase();
       this.searchOffenses(keyword);
     });
+ // code profile
+    const copyProfileBtn = document.getElementById('copyProfileBtn');
+    copyProfileBtn.addEventListener('click', () => {
+      const profileArea = document.getElementById('profileResult');
+      profileArea.select();
+      document.execCommand('copy');
+
+      copyProfileBtn.textContent = 'Đã sao chép!';
+      setTimeout(() => {
+        copyProfileBtn.textContent = 'Sao chép hồ sơ';
+      }, 2000);
+    });
+
+    // Khi người dùng nhập dữ liệu trong các ô input, cập nhật hồ sơ ngay
+    ['profileName', 'profileCCCD', 'profileTangVat', 'profileNote'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        this.generateProfile();
+      });
+    });
+
+
+
+
     // Category tabs clicks
     this.categoriesTabs.addEventListener('click', (e) => {
       if (e.target.classList.contains('category-tab')) {
@@ -197,6 +220,8 @@ class UI {
     
     // Update copy text
     this.copyTextArea.value = this.dataManager.generateCopyText();
+    this.generateProfile();
+
   }
   
   // Render selected offenses list
@@ -314,7 +339,43 @@ searchOffenses(keyword) {
   
   offensesListsContainer.appendChild(searchList);
 }
+generateProfile() {
+  const name = document.getElementById('profileName').value || 'Chưa có';
+  const cccd = document.getElementById('profileCCCD').value || 'Chưa có';
+  const tangVatRaw = document.getElementById('profileTangVat').value || 'Chưa có';
+  const note = document.getElementById('profileNote').value.trim();
 
+  const selectedDetails = this.dataManager.getSelectedOffensesDetails();
+const offensesText = selectedDetails.map(o => {
+  const categoryId = this.dataManager.findOffenseById(o.id).categoryId;
+  if ((categoryId === 'riot' || categoryId === 'hqAttack') && o.count > 1) {
+    return `${o.name} (lần ${o.count})`;
+  }
+  return o.count > 1 ? `${o.name} x${o.count}` : o.name;
+}).join(' + ');
+
+  const totalTime = this.dataManager.calculateTotalTime();
+
+  // Tang vật: không thụt lề nữa!
+  const tangVatLines = tangVatRaw;
+
+  // Mẫu hồ sơ
+  let profile = 
+`Tên      : ${name}
+CCCD     : ${cccd}
+Tội danh : ${offensesText}
+Tang vật :
+${tangVatLines}
+Mức án   : ${totalTime}p`;
+
+  if (note) {
+    profile += `\nNote     : ${note}`;
+  }
+
+  profile += `\nĐã xử lý`;
+
+  document.getElementById('profileResult').value = profile;
+}
 
   // Refresh the UI (call after data changes)
   refreshUI() {
@@ -322,6 +383,8 @@ searchOffenses(keyword) {
     this.renderOffenses();
     this.updateResults();
   }
+
+
 }
 
 

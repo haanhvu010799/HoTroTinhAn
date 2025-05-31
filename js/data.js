@@ -231,18 +231,22 @@ class DataManager {
 }
 
 
-  generateCopyText() {
-    const selectedDetails = this.getSelectedOffensesDetails();
-    const offenseTexts = selectedDetails.map(offense => {
-      return offense.count > 1 ? `${offense.name} x${offense.count}` : offense.name;
-    });
-    
-    const totalTime = this.calculateTotalTime();
-    return offenseTexts.join(' + ') + (offenseTexts.length > 0 ? ` ` : '');
+generateCopyText() {
+  const selectedDetails = this.getSelectedOffensesDetails();
+
+  const offenseTexts = selectedDetails.map(offense => {
+    const categoryId = this.findOffenseById(offense.id).categoryId;
+    if ((categoryId === 'riot' || categoryId === 'hqAttack') && offense.count > 1) {
+      return `${offense.name} (lần ${offense.count})`;
+    }
+    return offense.count > 1 ? `${offense.name} x${offense.count}` : offense.name;
+  });
+
+  return offenseTexts.join(' + ') + (offenseTexts.length > 0 ? ` ` : '');
+}
 
 
     // return offenseTexts.join(' + ') + (offenseTexts.length > 0 ? ` = ${totalTime} phút` : '');
-  }
 
   resetSelectedOffenses() {
     this.selectedOffenses = {};

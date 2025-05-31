@@ -361,15 +361,15 @@ const offensesText = selectedDetails.map(o => {
 
   // Mẫu hồ sơ
   let profile = 
-`Tên      : ${name}
-CCCD     : ${cccd}
-Tội danh : ${offensesText}
-Tang vật :
-${tangVatLines}
-Mức án   : ${totalTime}p`;
+`Tên: ${name}
+CCCD: ${cccd}
+Tội danh: ${offensesText}
+Tang vật: 
+        ${tangVatLines}
+Mức án: ${totalTime}p`;
 
   if (note) {
-    profile += `\nNote     : ${note}`;
+    profile += `\nNote: ${note}`;
   }
 
   profile += `\nĐã xử lý`;

@@ -340,9 +340,9 @@ searchOffenses(keyword) {
   offensesListsContainer.appendChild(searchList);
 }
 generateProfile() {
-  const name = document.getElementById('profileName').value || 'Chưa có';
-  const cccd = document.getElementById('profileCCCD').value || 'Chưa có';
-  const tangVatRaw = document.getElementById('profileTangVat').value || 'Chưa có';
+  const name = document.getElementById('profileName').value || '';
+  const cccd = document.getElementById('profileCCCD').value || '';
+  const tangVatRaw = document.getElementById('profileTangVat').value || '';
   const note = document.getElementById('profileNote').value.trim();
 
   const selectedDetails = this.dataManager.getSelectedOffensesDetails();

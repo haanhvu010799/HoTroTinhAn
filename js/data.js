@@ -40,11 +40,12 @@ const defaultOffenses = {
   ],
   level3: [
     { id: "l3_1", name: "Sử dụng vũ khí gây thương tích nghiêm trọng cho người khác", time: 60 },
-    { id: "l3_1", name: "Sư dụng phương tiện gây thương tích nghiêm trọng cho người khác", time: 60 },
-    { id: "l3_2", name: "Sử dụng phương tiện tấn công sĩ quan cảnh sát gây thương tích nghiêm trọng", time: 60 },
-    { id: "l3_2", name: "Sử dụng vũ khí tấn công sĩ quan cảnh sát gây thương tích nghiêm trọng", time: 60 },
-    { id: "l3_3", name: "Tấn công sĩ quan cảnh sát gây thương tích chưa nghiêm trọng", time: 60 },
-    { id: "l3_4", name: "Rao bán/ Hỏi mua, giao dịch vũ khí, vật phẩm cấm", time: 60 },
+    { id: "l3_2", name: "Sư dụng phương tiện gây thương tích nghiêm trọng cho người khác", time: 60 },
+    { id: "l3_3", name: "Sử dụng vũ khí tấn công sĩ quan cảnh sát gây thương tích nghiêm trọng", time: 60 },
+    { id: "l3_4", name: "Sử dụng phương tiện tấn công sĩ quan cảnh sát gây thương tích nghiêm trọng", time: 60 },
+    { id: "l3_5", name: "Sử dụng vũ khí tấn công tấn công sĩ quan cảnh sát gây thương tích chưa nghiêm trọng", time: 60 },
+    { id: "l3_6", name: "Sử dụng phương tiện tấn công sĩ quan cảnh sát gây thương tích chưa nghiêm trọng", time: 60 },
+    { id: "l3_7", name: "Rao bán/ Hỏi mua, giao dịch vũ khí, vật phẩm cấm", time: 60 },
   ],
   level4: [
     { id: "l4_1", name: "Tấn công Cán bộ Cao cấp", time: 120 },

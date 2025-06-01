@@ -364,8 +364,7 @@ const offensesText = selectedDetails.map(o => {
 `Tên: ${name}
 CCCD: ${cccd}
 Tội danh: ${offensesText}
-Tang vật: 
-        ${tangVatLines}
+Tang vật: ${tangVatLines}
 Mức án: ${totalTime}p`;
 
   if (note) {

@@ -364,8 +364,11 @@ const offensesText = selectedDetails.map(o => {
 `Tên: ${name}
 CCCD: ${cccd}
 Tội danh: ${offensesText}
-Tang vật: ${tangVatLines}
 Mức án: ${totalTime}p`;
+
+  if (tangVatRaw.trim()) {
+    profile += `\nTang vật: ${tangVatRaw}`;
+  }
 
   if (note) {
     profile += `\nNote: ${note}`;

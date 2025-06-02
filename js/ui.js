@@ -60,6 +60,9 @@ class UI {
       });
     });
 
+    document.getElementById('profileNguoiBaoLanh').addEventListener('input', () => {
+      this.generateProfile();
+    });
 
 
 
@@ -209,7 +212,19 @@ class UI {
     // Update total time
     const totalTime = this.dataManager.calculateTotalTime();
     this.totalTimeElement.textContent = `${totalTime} phút`;
-    
+    // Kiểm tra có vi phạm ngoài mức độ 1,2 không
+    const selected = this.dataManager.getSelectedOffensesDetails();
+    const baoLanhGroup = document.getElementById('nguoiBaoLanhGroup');
+
+    const hasNonBailable = selected.some(o => {
+      const categoryId = this.dataManager.findOffenseById(o.id).categoryId;
+      return categoryId !== 'level1' && categoryId !== 'level2';
+    });
+
+    if (baoLanhGroup) {
+      baoLanhGroup.style.display = hasNonBailable ? 'none' : 'block';
+    }
+
     // Tính tiền bảo lãnh
     const bailAmount = this.dataManager.calculateBailAmount();
     const bailAmountElement = document.getElementById('bailAmount');
@@ -344,27 +359,32 @@ generateProfile() {
   const cccd = document.getElementById('profileCCCD').value || '';
   const tangVatRaw = document.getElementById('profileTangVat').value || '';
   const note = document.getElementById('profileNote').value.trim();
+  const nguoiBaoLanh = document.getElementById('profileNguoiBaoLanh')?.value.trim() || '';
 
   const selectedDetails = this.dataManager.getSelectedOffensesDetails();
-const offensesText = selectedDetails.map(o => {
-  const categoryId = this.dataManager.findOffenseById(o.id).categoryId;
-  if ((categoryId === 'riot' || categoryId === 'hqAttack') && o.count > 1) {
-    return `${o.name} (lần ${o.count})`;
-  }
-  return o.count > 1 ? `${o.name} x${o.count}` : o.name;
-}).join(' + ');
+  const offensesText = selectedDetails.map(o => {
+    const categoryId = this.dataManager.findOffenseById(o.id).categoryId;
+    if ((categoryId === 'riot' || categoryId === 'hqAttack') && o.count > 1) {
+      return `${o.name} (lần ${o.count})`;
+    }
+    return o.count > 1 ? `${o.name} x${o.count}` : o.name;
+  }).join(' + ');
 
   const totalTime = this.dataManager.calculateTotalTime();
 
-  // Tang vật: không thụt lề nữa!
-  const tangVatLines = tangVatRaw;
-
-  // Mẫu hồ sơ
+  // Bắt đầu tạo hồ sơ
   let profile = 
 `Tên: ${name}
 CCCD: ${cccd}
 Tội danh: ${offensesText}
 Mức án: ${totalTime}p`;
+
+  // Tiền bảo lãnh: chỉ nếu người bảo lãnh có nhập & toàn bộ tội danh thuộc mức 1,2
+  let bailAmount = this.dataManager.calculateBailAmount();
+  if (nguoiBaoLanh && bailAmount > 0) {
+    profile += `\nTiền bảo lãnh: ${bailAmount.toLocaleString()}$`;
+    profile += `\nNgười bảo lãnh: ${nguoiBaoLanh}`;
+  }
 
   if (tangVatRaw.trim()) {
     profile += `\nTang vật: ${tangVatRaw}`;

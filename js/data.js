@@ -205,7 +205,7 @@ class DataManager {
   }
 
   // Áp dụng giới hạn
-  if (normalTime > 500) normalTime = 500;
+  if (normalTime > 499) normalTime = 499;
   if (riotTime > 1000) riotTime = 1000;
   if (hqAttackTime > 1000) hqAttackTime = 1000;
 

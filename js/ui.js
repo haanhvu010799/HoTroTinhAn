@@ -92,24 +92,48 @@ class UI {
         const offenseId = e.target.dataset.id;
         const countInput = document.querySelector(`input[data-count-id="${offenseId}"]`);
         
-        if (e.target.checked) {
-          countInput.disabled = false;
-          this.dataManager.selectOffense(offenseId, parseInt(countInput.value));
-        } else {
-          countInput.disabled = true;
-          this.dataManager.unselectOffense(offenseId);
+    if (e.target.checked) {
+      const offenseId = e.target.dataset.id;
+
+      // Nếu là "Nợ hóa đơn" và chưa có tội khác → chặn
+      if (offenseId === 'l5_1') {
+        const othersSelected = Object.keys(this.dataManager.selectedOffenses)
+          .filter(id => id !== 'l5_1').length > 0;
+
+        if (!othersSelected) {
+          alert("Bạn chỉ có thể chọn 'Nợ hóa đơn' khi đã có tội danh khác.");
+          e.target.checked = false;
+          return;
         }
-        
+      }
+
+    countInput.disabled = false;
+    const count = parseInt(countInput.value);
+    this.dataManager.selectOffense(offenseId, count);
+  } else {
+    countInput.disabled = true;
+    this.dataManager.unselectOffense(offenseId);
+  }
+
         this.updateResults();
       } else if (e.target.type === 'number') {
         const offenseId = e.target.dataset.countId;
         const checkbox = document.querySelector(`input[data-id="${offenseId}"]`);
         
-        if (checkbox.checked) {
-          this.dataManager.selectOffense(offenseId, parseInt(e.target.value));
-          this.updateResults();
-        }
+    if (checkbox.checked) {
+      let value = parseInt(e.target.value);
+
+      // Nếu là "Nợ hóa đơn", không cho nhỏ hơn 7
+      if (offenseId === 'l5_1' && value < 7) {
+        value = 7;
+        e.target.value = 7;
       }
+
+      this.dataManager.selectOffense(offenseId, value);
+      this.updateResults();
+    }
+
+          }
     });
   }
   
@@ -192,8 +216,11 @@ class UI {
     
     const countInput = document.createElement('input');
     countInput.type = 'number';
-    countInput.min = '1';
-    countInput.value = count;
+    // countInput.min = '1';
+    // countInput.value = count;
+    countInput.min = (offense.id === 'l5_1') ? '7' : '1';
+    countInput.value = (offense.id === 'l5_1') ? Math.max(count, 7) : count;
+
     countInput.dataset.countId = offense.id;
     countInput.disabled = !isSelected;
     

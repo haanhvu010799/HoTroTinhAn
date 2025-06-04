@@ -16,6 +16,19 @@ class UI {
     this.setupEventListeners();
   }
   
+  highlightKeywords(text) {
+  const keywords = ["vũ khí", "phương tiện", "cảnh sát", "chưa nghiêm trọng", "nghiêm trọng", "giáp"];
+  let result = text;
+
+  keywords.forEach(keyword => {
+    const regex = new RegExp(`(${keyword})`, 'gi'); // không phân biệt hoa thường
+    result = result.replace(regex, `<span style="color:red; font-weight:bold;">$1</span>`);
+  });
+
+  return result;
+}
+
+
   // Initialize UI elements
   initUI() {
     this.renderCategories();
@@ -160,7 +173,8 @@ class UI {
     
     const nameElement = document.createElement('div');
     nameElement.className = 'offense-name';
-    nameElement.textContent = offense.name;
+    nameElement.innerHTML = this.highlightKeywords(offense.name);
+
     
     const timeElement = document.createElement('div');
     timeElement.className = 'offense-time';

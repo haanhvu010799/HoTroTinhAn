@@ -8,7 +8,7 @@ const defaultCategories = {
   // level6: "Mức độ 6",
   riot: "Bạo loạn thành phố",
   hqAttack: "Tấn công trụ sở",
-  intrusion: "Xâm nhập"
+  intrusion: "Xâm nhập khu vực hạn chế"
 };
 
 // Sample offenses data

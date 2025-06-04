@@ -240,11 +240,21 @@ generateCopyText() {
 
   const offenseTexts = selectedDetails.map(offense => {
     const categoryId = this.findOffenseById(offense.id).categoryId;
+
+    // Trường hợp đặc biệt: "Nợ hóa đơn"
+    if (offense.name.trim().toLowerCase() === "nợ hóa đơn" && offense.count > 1) {
+      return `Vi phạm luật tiêu dùng (nợ ${offense.count} bill)`;
+    }
+
+    // Với bạo loạn/trụ sở: dùng "(lần X)"
     if ((categoryId === 'riot' || categoryId === 'hqAttack') && offense.count > 1) {
       return `${offense.name} (lần ${offense.count})`;
     }
+
+    // Trường hợp bình thường
     return offense.count > 1 ? `${offense.name} x${offense.count}` : offense.name;
   });
+
 
   return offenseTexts.join(' + ') + (offenseTexts.length > 0 ? ` ` : '');
 }

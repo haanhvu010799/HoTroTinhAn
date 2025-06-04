@@ -17,7 +17,7 @@ class UI {
   }
   
   highlightKeywords(text) {
-  const keywords = ["vũ khí", "phương tiện", "cảnh sát", "chưa nghiêm trọng", "nghiêm trọng", "giáp"];
+  const keywords = ["vũ khí", "phương tiện", "cảnh sát", "chưa nghiêm trọng", "nghiêm trọng", "giáp"."nắm đấm"];
   let result = text;
 
   keywords.forEach(keyword => {

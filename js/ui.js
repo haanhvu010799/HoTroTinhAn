@@ -123,15 +123,22 @@ class UI {
     if (checkbox.checked) {
       let value = parseInt(e.target.value);
 
-      // Nếu là "Nợ hóa đơn", không cho nhỏ hơn 7
+      // ✅ Nếu là "Nợ hóa đơn", không cho nhỏ hơn 7
       if (offenseId === 'l5_1' && value < 7) {
         value = 7;
         e.target.value = 7;
       }
 
+      // ✅ Nếu là tội "vũ khí trái phép" hoặc "tàng trữ vũ khí trái phép", giới hạn = 1
+      if (['l2_1', 'l2_2'].includes(offenseId)) {
+        value = 1;
+        e.target.value = 1;
+      }
+
       this.dataManager.selectOffense(offenseId, value);
       this.updateResults();
     }
+
 
           }
     });

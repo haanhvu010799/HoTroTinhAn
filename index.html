@@ -22,13 +22,9 @@
     <main class="main-content">
       <!-- Left Column - Case Details -->
       <div class="case-details">
-        <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Tìm kiếm tội danh...">
-        </div>
-
         <div class="results-container">
           <div class="results-header">
-            <h2>Kết quả</h2>
+            <h2>Thông tin vụ án</h2>
             <div class="total-time">
               <span>Tổng thời gian lĩnh án:</span>
               <span id="totalTime" class="time-value">0 phút</span>
@@ -50,35 +46,35 @@
             <div class="copy-actions">
               <textarea id="copyTextArea" readonly></textarea>
               <button id="copyBtn" class="btn btn-primary">Sao chép</button>
-              <button id="resetBtn" class="btn btn-secondary">Reset</button>
+              <button id="resetBtn" class="btn btn-secondary">Làm mới</button>
             </div>
           </div>
         </div>
 
         <div class="profile-container">
-          <h3>Tạo Hồ Sơ</h3>
+          <h3>Thông tin hồ sơ</h3>
           <div class="form-group">
-            <label for="profileName">Tên:</label>
-            <input type="text" id="profileName" placeholder="Nhập tên...">
+            <label for="profileName">Họ tên người vi phạm:</label>
+            <input type="text" id="profileName" placeholder="Nhập họ tên...">
           </div>
           <div class="form-group">
-            <label for="profileCCCD">CCCD:</label>
-            <input type="text" id="profileCCCD" placeholder="Nhập CCCD...">
+            <label for="profileCCCD">Số CCCD:</label>
+            <input type="text" id="profileCCCD" placeholder="Nhập số CCCD...">
           </div>
           <div class="form-group">
-            <label for="profileTangVat">Danh sách tang vật:</label>
-            <textarea id="profileTangVat" placeholder="Mô tả tang vật..."></textarea>
+            <label for="profileTangVat">Tang vật tịch thu:</label>
+            <textarea id="profileTangVat" placeholder="Liệt kê tang vật..."></textarea>
           </div>
           <div class="form-group" id="nguoiBaoLanhGroup">
             <label for="profileNguoiBaoLanh">Người bảo lãnh:</label>
             <input type="text" id="profileNguoiBaoLanh" placeholder="Nhập tên người bảo lãnh...">
           </div>
           <div class="form-group">
-            <label for="profileNote">Ghi chú:</label>
-            <textarea id="profileNote" placeholder="Ghi chú thêm..."></textarea>
+            <label for="profileNote">Ghi chú bổ sung:</label>
+            <textarea id="profileNote" placeholder="Thêm ghi chú..."></textarea>
           </div>
           <div class="form-group">
-            <label for="profileResult">Hồ sơ:</label>
+            <label for="profileResult">Nội dung hồ sơ:</label>
             <textarea id="profileResult" readonly></textarea>
             <button id="copyProfileBtn" class="btn btn-primary">Sao chép hồ sơ</button>
           </div>
@@ -87,9 +83,14 @@
 
       <!-- Right Column - Offense Selection -->
       <div class="offense-selection">
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Tìm kiếm tội danh...">
+        </div>
+        
         <div class="categories-container">
           <div class="categories-tabs" id="categoriesTabs"></div>
         </div>
+        
         <div class="offenses-container">
           <div id="offensesLists" class="offenses-lists"></div>
         </div>

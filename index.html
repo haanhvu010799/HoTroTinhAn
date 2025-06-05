@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CÔNG CỤ HỖ TRỢ TÍNH ÁN TÙ DÀNH CHO SĨ QUAN CẢNH SÁT BLAINE COUNTY</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+</head>
+<body>
+  <div class="app-container">
+  <header class="header">
+    <div class="header-content" style="display: flex; justify-content: center; align-items: center;">
+      <div class="header-brand" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <div class="header-logo">
+          <img src="lspd.jpg" alt="Logo" width="64" height="64">
+        </div>
+        <h1 style="text-align: center; flex: 1;">CÔNG CỤ HỖ TRỢ XỬ ÁN</h1>
+        <!-- <div class="header-logo">
+          <img src="lssd.jpg" alt="Logo LSSD" width="64" height="64">
+        </div> -->
+      </div>
+      <div class="header-actions">
+        <!-- <button id="toggleAdminBtn" class="btn btn-secondary">Quản lý tội danh</button> -->
+      </div>
+    </div>
+  </header>
+
+
+    <main class="main-content">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm tội danh...">
+      </div>
+      <div id="calculatorView" class="view active">
+        <div class="categories-container">
+          <div class="categories-tabs" id="categoriesTabs">
+            <!-- Categories tabs will be generated here -->
+          </div>
+        </div>
+        <div class="offenses-container">
+          <div id="offensesLists" class="offenses-lists">
+            <!-- Offenses lists will be generated here -->
+          </div>
+        </div>
+
+        <div class="results-container">
+          <div class="results-header">
+            <h2>Kết quả</h2>
+            <div class="total-time">
+              <span>Tổng thời gian lĩnh án:</span>
+              <span id="totalTime" class="time-value">0 phút</span>
+            </div>
+          </div>
+
+          <div class="bail-amount">
+            <span>Tiền bảo lãnh:</span>
+            <span id="bailAmount" class="bail-value">0</span>
+          </div>
+
+          <div class="selected-offenses">
+            <h3>Tội danh đã chọn</h3>
+            <ul id="selectedOffensesList" class="selected-list">
+              <!-- Selected offenses will be listed here -->
+            </ul>
+          </div>
+          <div class="copy-text">
+            <h3>Văn bản để sao chép</h3>
+            <div class="copy-actions">
+              <textarea id="copyTextArea" readonly></textarea>
+              <button id="copyBtn" class="btn btn-primary">Sao chép</button>
+              <button id="resetBtn" class="btn btn-secondary">Reset</button>
+            </div>
+          </div>
+        
+
+        <div class="profile-container">
+          <h3>Tạo Hồ Sơ</h3>
+          <div class="form-group">
+            <label for="profileName">Tên:</label>
+            <input type="text" id="profileName" placeholder="Nhập tên...">
+          </div>
+          <div class="form-group">
+            <label for="profileCCCD">CCCD:</label>
+            <input type="text" id="profileCCCD" placeholder="Nhập CCCD...">
+          </div>
+          <div class="form-group">
+            <label for="profileTangVat">Danh sách tang vật:</label>
+            <textarea id="profileTangVat" placeholder="Mô tả tang vật..."></textarea>
+          </div>
+          <div class="form-group" id="nguoiBaoLanhGroup">
+            <label for="profileNguoiBaoLanh">Người bảo lãnh:</label>
+            <input type="text" id="profileNguoiBaoLanh" placeholder="Nhập tên người bảo lãnh...">
+          </div>
+          <div class="form-group">
+            <label for="profileNote">Ghi chú:</label>
+            <textarea id="profileNote" placeholder="Ghi chú thêm..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="profileResult">Hồ sơ (tự động tạo):</label>
+            <textarea id="profileResult" readonly></textarea>
+            <button id="copyProfileBtn" class="btn btn-primary">Sao chép hồ sơ</button>
+          </div>
+        </div>
+  
+        </div>
+      </div>
+
+      <div id="adminView" class="view">
+        <div class="admin-header">
+          <h2>Quản lý tội danh</h2>
+          <button id="backToCalculatorBtn" class="btn btn-secondary">Quay lại máy tính án</button>
+        </div>
+        
+        <div class="admin-content">
+          <div class="admin-categories">
+            <h3>Chọn danh mục</h3>
+            <div id="adminCategoriesTabs" class="categories-tabs">
+              <!-- Admin categories tabs will be generated here -->
+            </div>
+          </div>
+          
+          <div class="admin-offenses">
+            <div class="admin-offenses-header">
+              <h3>Danh sách tội danh</h3>
+              <button id="addOffenseBtn" class="btn btn-primary">Thêm tội danh mới</button>
+            </div>
+            <div id="adminOffensesList" class="admin-offenses-list">
+              <!-- Admin offenses list will be generated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add Offense Modal -->
+    <div id="addOffenseModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Thêm tội danh mới</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="addOffenseForm">
+            <div class="form-group">
+              <label for="offenseName">Tên tội danh:</label>
+              <input type="text" id="offenseName" required>
+            </div>
+            <div class="form-group">
+              <label for="offenseTime">Thời gian phạt (phút):</label>
+              <input type="number" id="offenseTime" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="offenseCategory">Danh mục:</label>
+              <select id="offenseCategory" required>
+                <!-- Categories will be populated here -->
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary cancel-btn">Hủy</button>
+              <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Offense Modal -->
+    <div id="editOffenseModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Sửa tội danh</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="editOffenseForm">
+            <input type="hidden" id="editOffenseId">
+            <div class="form-group">
+              <label for="editOffenseName">Tên tội danh:</label>
+              <input type="text" id="editOffenseName" required>
+            </div>
+            <div class="form-group">
+              <label for="editOffenseTime">Thời gian phạt (phút):</label>
+              <input type="number" id="editOffenseTime" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="editOffenseCategory">Danh mục:</label>
+              <select id="editOffenseCategory" required>
+                <!-- Categories will be populated here -->
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary cancel-btn">Hủy</button>
+              <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Xác nhận xóa</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có chắc chắn muốn xóa tội danh này không?</p>
+          <input type="hidden" id="deleteOffenseId">
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary cancel-btn">Hủy</button>
+            <button type="button" id="confirmDeleteBtn" class="btn btn-danger">Xóa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+  Được Sir Vũ từ Văn Phòng Thống Đốc thực hiện nhằm hỗ trợ các sĩ quan cảnh sát xử án hiệu quả.
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

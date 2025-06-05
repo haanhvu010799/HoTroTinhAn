@@ -1,88 +1,60 @@
 /* Responsive styles */
-@media (min-width: 768px) {
-  .header h1 {
-    font-size: 2rem;
-  }
-  
-  .admin-content {
-    grid-template-columns: 250px 1fr;
-  }
-  
-  .copy-actions {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  
-  #copyTextArea {
-    flex: 1;
-    height: 100px;
-  }
-  
-  #copyBtn {
-    flex-shrink: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .header-content {
-    flex-direction: column;
+@media (max-width: 1200px) {
+  .main-content {
+    grid-template-columns: 1fr;
     gap: var(--space-md);
   }
   
-  .results-header {
+  .case-details,
+  .offense-selection {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
     flex-direction: column;
-    align-items: flex-start;
+    text-align: center;
+    gap: var(--space-md);
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .categories-tabs {
+    flex-direction: column;
+  }
+  
+  .category-tab {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .copy-actions {
+    flex-direction: column;
     gap: var(--space-sm);
   }
   
-  .admin-offense-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .admin-offense-info {
-    margin-bottom: var(--space-md);
+  .copy-actions button {
     width: 100%;
-  }
-  
-  .admin-offense-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-  
-  .offense-card {
-    padding: var(--space-sm);
-  }
-  
-  .offense-header {
-    flex-direction: column;
-  }
-  
-  .offense-time {
-    margin-left: 0;
-    margin-top: var(--space-xs);
   }
 }
 
 @media (max-width: 480px) {
-  .categories-tabs {
-    flex-direction: column;
-    width: 100%;
+  .main-content {
+    padding: var(--space-sm);
   }
   
-  .category-tab {
-    text-align: center;
+  .case-details,
+  .offense-selection {
+    padding: var(--space-md);
   }
   
-  .form-actions {
-    flex-direction: column;
-  }
-  
-  .form-actions button {
-    width: 100%;
-  }
-  
-  #copyBtn {
-    width: 100%;
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px; /* Prevent zoom on mobile */
   }
 }

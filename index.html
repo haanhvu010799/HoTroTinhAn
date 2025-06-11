@@ -45,24 +45,36 @@
         </div>
 
         <div class="results-container">
-          <div class="results-header">
-            <h2>Kết quả</h2>
-            <div class="total-time">
-              <span>Tổng thời gian lĩnh án:</span>
-              <span id="totalTime" class="time-value">0 phút</span>
-            </div>
-          </div>
+<div class="results-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+  <div style="flex: 1;">
+    <h2 style="margin: 0;">Kết quả</h2>
+  </div>
+
+  <div style="flex: 1; text-align: center;">
+    <label for="terroristToggle" style="display: inline-flex; align-items: center; font-weight: 500; cursor: pointer;">
+      <input type="checkbox" id="terroristToggle" style="margin-right: 6px; transform: scale(1.2);">
+      Đối tượng khủng bố
+    </label>
+  </div>
+
+  <div style="flex: 1; text-align: right;">
+    <span>Tổng thời gian lĩnh án:</span>
+    <span id="totalTime" class="time-value">0 phút</span>
+  </div>
+</div>
+
 
           <div class="bail-amount">
             <span>Tiền bảo lãnh:</span>
             <span id="bailAmount" class="bail-value">0</span>
           </div>
-
+          
           <div class="selected-offenses">
             <h3>Tội danh đã chọn</h3>
             <ul id="selectedOffensesList" class="selected-list">
               <!-- Selected offenses will be listed here -->
             </ul>
+            
           </div>
           <div class="copy-text">
             <h3>Văn bản để sao chép</h3>

@@ -186,35 +186,65 @@ class DataManager {
   //   const selectedDetails = this.getSelectedOffensesDetails();
   //   return selectedDetails.reduce((total, offense) => total + offense.totalTime, 0);
   // }
-  calculateTotalTime() {
+ calculateTotalTime() {
   let normalTime = 0;
   let riotTime = 0;
   let hqAttackTime = 0;
 
+  const terroristMode = document.getElementById('terroristToggle')?.checked;
+
+  let hasRiot = false;
+  let hasOtherOffense = false;
+
   for (const offenseId in this.selectedOffenses) {
     const count = this.selectedOffenses[offenseId];
     const result = this.findOffenseById(offenseId);
-    if (result) {
-      const offenseTime = result.offense.time * count;
-      const categoryId = result.categoryId;
+    if (!result) continue;
 
-      if (categoryId === 'riot') {
-        riotTime += offenseTime;
-      } else if (categoryId === 'hqAttack') {
-        hqAttackTime += offenseTime;
-      } else {
-        normalTime += offenseTime;
-      }
+    const { categoryId, offense } = result;
+
+    let applyCount = 1;
+    const isSevereInjury = ['l3_1', 'l3_2','l3_3','l3_4'].includes(offenseId);
+    const isWeaponException = ['l2_1', 'l2_2'].includes(offenseId);
+    const isConsumerLaw = offenseId === 'l5_1';
+
+    // Check flags
+    if (categoryId === 'riot') hasRiot = true;
+    if (!isConsumerLaw && categoryId !== 'riot' && categoryId !== 'hqAttack') {
+      hasOtherOffense = true;
+    }
+
+    if (isSevereInjury) {
+      applyCount = count;
+    } else if (terroristMode && !isWeaponException) {
+      applyCount = count;
+    } else if (!terroristMode && isConsumerLaw) {
+      applyCount = Math.max(count, 7); // mặc định là 7 bill nếu đã chọn
+    }
+
+    const total = offense.time * applyCount;
+
+    if (categoryId === 'riot') {
+      riotTime += total;
+    } else if (categoryId === 'hqAttack') {
+      hqAttackTime += total;
+    } else {
+      normalTime += total;
     }
   }
 
-  // Áp dụng giới hạn
-  if (normalTime > 499) normalTime = 499;
+  // Áp dụng giới hạn nếu KHÔNG PHẢI khủng bố hoặc KHÔNG có bạo loạn
+  const skipLimit = terroristMode && hasRiot;
+  if (!skipLimit) {
+    if (normalTime > 499) normalTime = 499;
+  }
+
   if (riotTime > 1000) riotTime = 1000;
   if (hqAttackTime > 1000) hqAttackTime = 1000;
 
   return normalTime + riotTime + hqAttackTime;
 }
+
 
   calculateBailAmount() {
   const selectedDetails = this.getSelectedOffensesDetails();

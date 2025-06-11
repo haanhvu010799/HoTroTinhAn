@@ -85,7 +85,10 @@ class UI {
         this.changeCategory(e.target.dataset.category);
       }
     });
-    
+    document.getElementById('terroristToggle').addEventListener('change', () => {
+      this.updateResults(); // Gọi lại cập nhật kết quả tính án
+    });
+
     // Offense selection handling
     this.offensesLists.addEventListener('change', (e) => {
       if (e.target.type === 'checkbox') {

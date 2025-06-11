@@ -61,7 +61,7 @@ const defaultOffenses = {
   //   { id: "l6_3", name: "Tội phạm có tổ chức", time: 85 },
   // ],
   riot: [
-    { id: "r_1", name: "Bạo loạn Thành Phố", time: 200 },
+    { id: "r_1", name: "Bạo loạn thành phố", time: 200 },
     // { id: "r_2", name: "Tham gia bạo loạn", time: 60 },
     // { id: "r_3", name: "Cầm đầu bạo loạn", time: 90 },
   ],
@@ -247,9 +247,9 @@ generateCopyText() {
     }
 
     // Với bạo loạn/trụ sở: dùng "(lần X)"
-    if ((categoryId === 'riot' || categoryId === 'hqAttack') && offense.count > 1) {
-      return `${offense.name} (lần ${offense.count})`;
-    }
+  if (categoryId === 'riot' || categoryId === 'hqAttack') {
+    return `${offense.name} lần ${offense.count}`;
+  }
 
     // Trường hợp bình thường
     return offense.count > 1 ? `${offense.name} x${offense.count}` : offense.name;

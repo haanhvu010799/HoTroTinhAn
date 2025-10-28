@@ -205,7 +205,7 @@ class DataManager {
 
     let applyCount = 1;
     const isSevereInjury = ['l3_1', 'l3_2','l3_3','l3_4'].includes(offenseId);
-    const isWeaponException = ['l2_1', 'l2_2','l1_4'].includes(offenseId);
+    const isWeaponException = ['l2_1', 'l2_2'].includes(offenseId);
     const isConsumerLaw = offenseId === 'l5_1';
 
     // Check flags
